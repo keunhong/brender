@@ -4,7 +4,7 @@ A small Blender API (bpy) wrapper.
 
 ## Example Usage.
 
-```
+```python
   import brender
   from imageio import imwrite
 
