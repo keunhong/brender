@@ -11,7 +11,9 @@ setup(
   keywords = ['python', 'brender', 'blender'],
   classifiers = [],
   install_requires=[
-    'numpy', 'scipy',
+    'numpy',
+    'scipy',
+    'toolbox~=0.2.0',
   ],
   dependency_links=['http://github.com/keunhong/toolbox/tarball/master#egg=package-0.2']
 )
