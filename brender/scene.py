@@ -1,6 +1,5 @@
 import bpy
 import enum
-import logging
 import tempfile
 from contextlib import contextmanager
 
@@ -8,8 +7,6 @@ import skimage
 import skimage.io
 
 from toolbox.io.images import load_hdr
-
-logger = logging.getLogger(__name__)
 
 
 class BackgroundMode(enum.Enum):
@@ -160,7 +157,7 @@ class Scene:
         scene.world.node_tree.links.clear()
 
     def set_envmap(self, path, scale=1.0, rotation=(0.0, 0.0, 0.0)):
-        logger.info("Setting envmap to {}".format(str(path)))
+        print(f"Setting envmap to {path}")
 
         self.clear_envmap()
 
@@ -209,7 +206,7 @@ class Scene:
         for material in bpy.data.materials:
             if material.name == 'material_floor':
                 continue
-            logger.info('Removing material %r', material.name)
+            print(f'Removing material {material.name!r}')
             # material.user_clear()
             bpy.data.materials.remove(material, do_unlink=True)
 
@@ -218,7 +215,7 @@ class Scene:
             if obj.name == 'floor':
                 continue
             if obj.type == 'MESH':
-                logger.info('Removing mesh %r', obj.name)
+                print('Removing mesh {obj.name!r}')
                 bpy.data.objects.remove(obj, do_unlink=True)
 
     @contextmanager

@@ -1,14 +1,10 @@
-import logging
 from contextlib import contextmanager
-from itertools import chain
 
 import bpy
 import mathutils
 
 from brender.world_scale_uvs import measure_uv_density
 from toolbox import cameras
-
-logger = logging.getLogger(__name__)
 
 
 _context_stack = []
@@ -81,7 +77,7 @@ class Mesh:
 
     @classmethod
     def from_obj(cls, scene, path, size=None, **kwargs) -> 'Mesh':
-        logger.info('Importing mesh from %r', str(path))
+        print(f'Importing mesh from {path}')
 
         with scene.select():
             bpy.ops.import_scene.obj(
@@ -96,7 +92,7 @@ class Mesh:
 
     @classmethod
     def from_3ds(cls, scene, path) -> 'Mesh':
-        logger.info('Importing mesh from %r', str(path))
+        print(f'Importing mesh from {path}')
 
         with scene.select():
             bpy.ops.import_scene.autodesk_3ds(filepath=str(path))
@@ -144,7 +140,6 @@ class Mesh:
         self.bobj.name = name
 
     def __del__(self):
-        # logger.info('Destroying mesh %r', self.name)
         if not self.do_not_delete:
             bpy.data.objects.remove(self.bobj, do_unlink=True)
 

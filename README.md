@@ -2,6 +2,20 @@
 A small Blender API (bpy) wrapper.
 
 
+## Introduction
+
+This Python package implements a simple wrapper around the Blender API. It tries to automate the weird stateful API that Blender has but some quirks may leak.
+
+This package implements an incredibly leaky abstraction which means you may still need to understand how the Blender API works.
+
+
+## Prerequites
+
+You will need to either install this package in the Blender Python interpreter (untested), or install the Blender API package (bpy) as a Python library. Please see https://pypi.org/project/bpy/.
+
+
+
+
 ## Example Usage.
 
 ```python

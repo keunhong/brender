@@ -10,5 +10,9 @@ setup(
   download_url = 'https://github.com/keunhong/brender/archive/0.1.tar.gz',
   keywords = ['python', 'brender', 'blender'],
   classifiers = [],
+  install_requires=[
+    'numpy', 'scipy',
+  ],
+  dependency_links=['http://github.com/keunhong/toolbox/tarball/master#egg=package-0.2']
 )
 

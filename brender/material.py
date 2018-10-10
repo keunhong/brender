@@ -1,17 +1,16 @@
 import uuid
 import bpy
 import json
-import logging
 
 from pathlib import Path
 
 import math
 
+import warnings
+
 import mdl
 from brender.mesh import PASS_INDEX_UV_DENSITY_MULT
 from toolbox.io.images import load_image, load_hdr
-
-logger = logging.getLogger(__name__)
 
 
 class BlenderMaterial(object):
@@ -33,7 +32,7 @@ class BlenderMaterial(object):
             BlenderMaterial._next_id += 1
             bpy.data.materials.new(name=self.name)
             self._bobj = bpy.data.materials[self.name]
-            logger.info(f'Created new material {self.name}')
+            print(f'Created new material {self.name}')
         else:
             self._bobj_was_given = True
             self._bobj = bobj
@@ -47,14 +46,6 @@ class BlenderMaterial(object):
 
     def __del__(self):
         pass
-        # if not self._bobj_was_given:
-        #     logger.info('Deleting material %r', self.name)
-        #     if self.name in bpy.data.materials:
-        #         bpy.data.materials.remove(bpy.data.materials[self.name])
-        #     else:
-        #         logger.error(
-        #             'Material %r destructed but blender object with '
-        #             'name %r does not exist', self, self.name)
 
 
 class NodesMaterial(BlenderMaterial):
@@ -161,7 +152,7 @@ class NodesMaterial(BlenderMaterial):
         if annot_path.exists():
             with open(annot_path, 'r') as f:
                 scale = json.load(f).get('scale', 1.0)
-                logger.info('Loaded scale=%f from %r', scale, str(annot_path))
+                print(f'Loaded scale={scale} from {annot_path}')
         else:
             scale = 1.0
         return scale
@@ -346,7 +337,7 @@ class MDLMaterial(NodesMaterial):
             elif isinstance(v, tuple):
                 kwargs[k] = v
             elif v is None:
-                logger.warning('Value for %s is None', k)
+                warnings.warn(f'Value for {k} is None')
             else:
                 raise ValueError(f'Unknown value type: {v}')
 
