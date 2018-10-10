@@ -7,7 +7,7 @@ from contextlib import contextmanager
 import skimage
 import skimage.io
 
-from toolbox.images import load_hdr
+from toolbox.io.images import load_hdr
 
 logger = logging.getLogger(__name__)
 

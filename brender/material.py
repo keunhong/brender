@@ -9,7 +9,7 @@ import math
 
 import mdl
 from brender.mesh import PASS_INDEX_UV_DENSITY_MULT
-from toolbox.images import load_hdr, load_image
+from toolbox.io.images import load_image, load_hdr
 
 logger = logging.getLogger(__name__)
 
