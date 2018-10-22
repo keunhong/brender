@@ -35,7 +35,10 @@ def stash_selection():
     finally:
         bpy.ops.object.select_all(action='DESELECT')
         for bobj in was_selected:
-            bobj.select = True
+            try:
+                bobj.select = True
+            except ReferenceError:
+                pass
 
 
 @contextmanager
@@ -117,6 +120,7 @@ class Mesh:
         return parent_bobj
 
     def __init__(self, objects, name=None, recenter=False):
+        self.do_not_delete = True
         if isinstance(objects, list):
             to_keep = set(
                 o for o in objects if o.type == 'MESH' and o.name != 'floor')
@@ -131,7 +135,6 @@ class Mesh:
         else:
             self.bobj = objects
             self.bobjs = [self.bobj]
-            self.do_not_delete = True
 
         if name is None:
             name = f'brender_mesh_{self._next_id}'
